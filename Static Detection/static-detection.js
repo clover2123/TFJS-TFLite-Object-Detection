@@ -29,6 +29,7 @@ let objectDetector;
 
 // Load the input image.
 imageInput.addEventListener("change", (event) => {
+    console.log("imageInput Changed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
     const file = event.target.files[0];
     if (file) {
         const reader = new FileReader();
@@ -44,9 +45,13 @@ imageInput.addEventListener("change", (event) => {
 
 // Run the detector.
 async function detect() {
+    const boxesContainer = document.querySelector(".boxes-container");
+    boxesContainer.innerHTML = "";
+
     text.textContent = "Loading...";
     // Load the TF Lite model.
     if (!objectDetector) {
+        text.textContent = "Now Loading...";
         objectDetector = await tflite.loadTFLiteModel(MODEL_PATH);
     }
 
